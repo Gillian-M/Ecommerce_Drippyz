@@ -13,30 +13,41 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Drippyz</a>
+                <a class="navbar-brand" asp-controller="Products" asp-action="Index">Drippyz</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="navbar-nav flex-grow-1" ">
-                            <a class="nav-link text-dark" asp-controller="Products" asp-action="Index"><i class="bi bi-basket3">Products</a>
+                        <li class="navbar-nav flex-grow-1">
+                            <a class="nav-link text-dark" asp-controller="Products" asp-action="Index"><i class="bi bi-basket3"></i>Products</a>
 
                         </li>
+                        <li class="navbar-nav flex-grow-1">
+                            <a class="nav-link text-dark" asp-controller="Stores" asp-action="Index"><i class="bi bi-basket3"></i>Stores</a>
+
+                        </li>
+
+                        <!--
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="button" aria-haspopup="true" aria-expanded="false">    </a>
-                            <i class="bi bi-gear"></i>Management
-                            </a>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-gear"></i> Management
+                                    </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Stores" asp-action="Index"> <i class="bi bi-shop">Stores</i></a>
-
-                            </div>
-                        </li>
-
-
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" asp-controller="Stores" asp-action="Index"><i class="bi bi-camera-reels"></i> Stores</a>
+                                        <a class="dropdown-item" asp-controller="Stores" asp-action="Index"><i class="bi bi-headset"></i> Stores</a>
+                                      
+                                    </div>
+                                </li>-->
+                                  
                     </ul>
+
+                      <form class="form-inline my-2 my-lg-0" asp-controller="Products" asp-action="Filter" style="padding-right: 25px;">
+                        <input name="searchString" type="text" class="form-control" placeholder="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -49,12 +60,12 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - Drippyz - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - Drippyz -
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-                            @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
