@@ -21,7 +21,7 @@ namespace Drippyz.Controllers
         //Asynchronous method with parameters
         public async Task<IActionResult> Index()
         {
-            var allProducts = await _context.Products.ToListAsync();
+            var allProducts = await _context.Products.Include(n => n.Store).ToListAsync();
             return View(allProducts);
 
         }
