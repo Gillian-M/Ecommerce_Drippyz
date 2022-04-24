@@ -42,6 +42,11 @@ namespace Drippyz.Controllers
             var storeDetails = await _service.GetByIdAsync(id);
             if (storeDetails == null) return View("NotFound");
             return View(storeDetails);
+
+
+
+
+
         }
         //Get the store details edit Id
         //Post request after the details are updated
@@ -56,14 +61,28 @@ namespace Drippyz.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Id,Glyph,Name,Description")] Store store)
         {
             if (!ModelState.IsValid) return View(store);
-            await _service.AddAsync(store);
+            await _service.UpdateAsync(id, store);
             return RedirectToAction(nameof(Index));
         }
+
+
+
+
+
         //Store Delete
-        [HttpPost, ActionName("Delete")]
+     
         //of store exists in database call the delete confirm method
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var storeDetails = await _service.GetByIdAsync(id);
+            if (storeDetails == null) return View("NotFound");
+            return View(storeDetails);
+        }
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirm(int id)
         {
+            
             var storeDetails = await _service.GetByIdAsync(id);
             if (storeDetails == null) return View("NotFound");
 
@@ -73,3 +92,4 @@ namespace Drippyz.Controllers
     }
 }
 
+///,[Bind("Id,Glyph,Name,Description")]Store store

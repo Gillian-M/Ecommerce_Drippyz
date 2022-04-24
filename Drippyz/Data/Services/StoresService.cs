@@ -12,5 +12,9 @@ namespace Drippyz.Data.Services
         {
         }
 
+        public Task UpdateAsync(Store store)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
 using Drippyz.Data;
+using Drippyz.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 //USE SQL Server ;installed and used mcrosoft entity framework core and defined the connection string
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString") ?? throw new InvalidOperationException("Connection string 'AppDbContext' not found.")));
 
-
+//Services configuration 
+builder.Services.AddScoped<IStoresService, StoresService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

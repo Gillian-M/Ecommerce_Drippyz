@@ -19,9 +19,9 @@ namespace Drippyz.Data
                         new Store()
                         {
 
-                            Glyph = "http://dotnethow.net/images/cinemas/Drippyz.png",
-                            Name = "Drippyz",
-                            Description = "Ice cream shop"
+                            Glyph = "https://www.dotnethow.net/images/stores/store-2",
+                            Name = "test upasted",
+                            Description = "update description oop"
                         },
                     });
                     context.SaveChanges();
@@ -40,7 +40,7 @@ namespace Drippyz.Data
                             Price = 11.00,
                             ImageURL = "https://sample/images/products/product-1",
                             ProductCategory = ProductCategory.Bar,
-                            StoreId = 1
+                            StoreId = 3
                         },
 
                         new Product()
@@ -51,7 +51,7 @@ namespace Drippyz.Data
                             Price = 12.00,
                             ImageURL = "https://sample/images/products/product-2",
                             ProductCategory = ProductCategory.Bar,
-                            StoreId = 1
+                            StoreId = 3
 
                         },
                      });
