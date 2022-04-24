@@ -46,8 +46,4 @@
 
 <!--default stores controller-->
 
-<div style="position: fixed; right: 25px; bottom: 72px;" class="text-white">
-    <a  asp-action="Create" class="btn-primary btn-success">
-        <i class="bi bi-plus-circle"></i>Add New
-    </a>
-</div>
+@await Html.PartialAsync("_CreateItem", "Stores")

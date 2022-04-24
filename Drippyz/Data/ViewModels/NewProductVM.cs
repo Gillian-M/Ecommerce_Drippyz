@@ -8,12 +8,13 @@ namespace Drippyz.Models
     //View Model 
     public class NewProductVM
     {
+        public int Id { get; set; }
 
         [Display(Name = "Product Name")]
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        [Display(Name = "Product Name")]
+        [Display(Name = "Product Description")]
         [Required(ErrorMessage = "Product Description is required")]
         public string Description { get; set; }
 

@@ -13,6 +13,22 @@ namespace Drippyz.Data.Services
             _context = context;
         }
 
+        //Create Product Method
+        public async Task AddNewProductAsync(NewProductVM data)
+        {
+            var newProduct = new Product()
+            {
+                Name = data.Name,
+                Description = data.Description,
+                Price = data.Price,
+                ImageURL = data.ImageURL,
+                ProductCategory = data.ProductCategory,
+                StoreId = data.StoreId
+            };
+            await _context.Products.AddAsync(newProduct);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<NewProductDropdownsVM> GetNewProductDropdownsValues()
         {
             var response = new NewProductDropdownsVM()
@@ -32,5 +48,24 @@ namespace Drippyz.Data.Services
 
             return ProductDetails;
         }
+
+        public async Task UpdateProductAsync(NewProductVM data)
+        {
+            var dbProduct = await _context.Products.FirstOrDefaultAsync(n => n.Id == data.Id);
+            if (dbProduct != null)
+            {
+                dbProduct.Name = data.Name;
+                dbProduct.Description = data.Description;
+                dbProduct.Price = data.Price;
+                dbProduct.ImageURL = data.ImageURL;
+                dbProduct.ProductCategory = data.ProductCategory;
+                dbProduct.StoreId = data.StoreId;
+                await _context.SaveChangesAsync();
+            };
+
+        }
     }
 }
+
+
+
