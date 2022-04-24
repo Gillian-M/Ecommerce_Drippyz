@@ -8,8 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 //USE SQL Server ;installed and used mcrosoft entity framework core and defined the connection string
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString") ?? throw new InvalidOperationException("Connection string 'AppDbContext' not found.")));
 
-//Services configuration 
+//Services configuration methods
 builder.Services.AddScoped<IStoresService, StoresService>();
+builder.Services.AddScoped<IProductsService, ProductsService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

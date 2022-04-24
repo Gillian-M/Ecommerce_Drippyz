@@ -1,10 +1,11 @@
 ﻿using Drippyz.Data;
+using Drippyz.Data.Base;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Drippyz.Models
 {
-    public class Product 
+    public class Product: IEntityBase
     {
         [Key]
         public int Id { get; set; }
