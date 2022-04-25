@@ -22,6 +22,11 @@ namespace Drippyz.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Store> Stores { get; set; }
 
+        //Order tables 
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Item> Items { get; set; }
+ 
+
 
 
 
