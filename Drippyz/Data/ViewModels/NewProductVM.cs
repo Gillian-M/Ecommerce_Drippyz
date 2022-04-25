@@ -14,7 +14,7 @@ namespace Drippyz.Models
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        [Display(Name = "Product Descriptiouses r")]
+        [Display(Name = "Product Description")]
         [Required(ErrorMessage = "Product Description is required")]
         public string Description { get; set; }
 
