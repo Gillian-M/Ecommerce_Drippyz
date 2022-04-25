@@ -4,6 +4,7 @@ using Drippyz.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Drippyz.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220425184120_CartItems_Added")]
+    partial class CartItems_Added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,30 @@ namespace Drippyz.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Drippyz.Models.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CartItemId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItems");
+                });
 
             modelBuilder.Entity("Drippyz.Models.Item", b =>
                 {
@@ -103,30 +129,6 @@ namespace Drippyz.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Drippyz.Models.ShoppingCartItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ShoppingCartItems");
-                });
-
             modelBuilder.Entity("Drippyz.Models.Store", b =>
                 {
                     b.Property<int>("Id")
@@ -150,6 +152,15 @@ namespace Drippyz.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Stores");
+                });
+
+            modelBuilder.Entity("Drippyz.Models.CartItem", b =>
+                {
+                    b.HasOne("Drippyz.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Drippyz.Models.Item", b =>
@@ -180,15 +191,6 @@ namespace Drippyz.Migrations
                         .IsRequired();
 
                     b.Navigation("Store");
-                });
-
-            modelBuilder.Entity("Drippyz.Models.ShoppingCartItem", b =>
-                {
-                    b.HasOne("Drippyz.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Drippyz.Models.Order", b =>

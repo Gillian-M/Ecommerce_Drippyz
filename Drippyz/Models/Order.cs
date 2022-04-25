@@ -11,6 +11,6 @@ namespace Drippyz.Models
         public string UserId { get; set; }
 
         //Relationship of Order with Order Item 
-        public List<Item> Items { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
     }
 }
