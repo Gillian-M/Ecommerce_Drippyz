@@ -1,4 +1,5 @@
 using Drippyz.Data;
+using Drippyz.Data.Cart;
 using Drippyz.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,13 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 //Services configuration methods
 builder.Services.AddScoped<IStoresService, StoresService>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<IOrdersService, OrdersService>();
+
+
+//Shopping cart session configration
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+builder.Services.AddSession();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -29,6 +37,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+//session
+app.UseSession();
 
 app.UseAuthorization();
 

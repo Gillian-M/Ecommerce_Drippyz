@@ -14,7 +14,9 @@ namespace Drippyz.Controllers
             _productsService = productsService;
             _shoppingCart = shoppingCart;
         }
-        public IActionResult Index()
+
+        //add Item to shopping cart 
+        public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
@@ -27,5 +29,30 @@ namespace Drippyz.Controllers
 
             return View(response);
         }
+        public async Task<IActionResult> AddItemToShoppingCart(int id)
+        {
+            var item = await _productsService.GetProductByIdAsync(id);
+
+            if(item != null)
+            {
+                _shoppingCart.AddItemToCart(item);
+            }
+            return base.RedirectToAction(nameof(ShoppingCart));
+        }
+
+        //remove from shopping cart 
+        public async Task<IActionResult> RemoveItemFromCart(int id)
+        {
+            var item = await _productsService.GetProductByIdAsync(id);
+
+            if (item != null)
+            {
+                _shoppingCart.RemoveItemFromCart(item);
+            }
+            return base.RedirectToAction(nameof(ShoppingCart));
+        }
+
+
+
     }
 }

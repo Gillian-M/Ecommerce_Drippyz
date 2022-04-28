@@ -34,7 +34,7 @@
                         <td class="align-middle">@item.Product.Price.ToString("c")</td>
                         <td class="align-middle">@((item.Total*item.Product.Price).ToString("c"))</td>
                         <td class="align-middle"></td>
-                        <a class="text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id="@item.Product.Id">
+                        <a class="text-danger" asp-controller="Orders" asp-action="RemoveItemFromCart" asp-route-id="@item.Product.Id">
                             <i class="bi bi-cart-dash"></i>
                         </a>
                         <a class="text-success" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Product.Id">
