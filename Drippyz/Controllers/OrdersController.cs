@@ -17,6 +17,13 @@ namespace Drippyz.Controllers
             _ordersService = ordersService;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            string userId = "";
+            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            return View(orders);
+        }
+
         //add Item to shopping cart 
         public IActionResult ShoppingCart()
         {
@@ -70,5 +77,7 @@ namespace Drippyz.Controllers
             return View("CompleteOrder");
 
         }
+
+        
     }
 }
