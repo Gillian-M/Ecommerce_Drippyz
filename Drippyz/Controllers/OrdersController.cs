@@ -9,10 +9,12 @@ namespace Drippyz.Controllers
     {
         private readonly IProductsService _productsService;
         private readonly ShoppingCart _shoppingCart;
-        public OrdersController(IProductsService productsService, ShoppingCart shoppingCart)
+        private readonly IOrdersService _ordersService;
+        public OrdersController(IProductsService productsService, ShoppingCart shoppingCart, IOrdersService ordersService)
         {
             _productsService = productsService;
             _shoppingCart = shoppingCart;
+            _ordersService = ordersService;
         }
 
         //add Item to shopping cart 
@@ -53,6 +55,20 @@ namespace Drippyz.Controllers
         }
 
 
+        //  Complete Order method
+        //service injected in constructor 
 
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = _shoppingCart.GetShoppingCartItems();
+            string userId = "";
+            string userEmailAddress = "";
+
+            await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
+            await _shoppingCart.ClearShoppingCartAsync();
+
+            return View("OrderCompleted");
+
+        }
     }
 }
