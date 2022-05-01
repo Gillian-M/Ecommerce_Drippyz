@@ -40,7 +40,7 @@ namespace Drippyz.Data
                             Price = 11.00,
                             ImageURL = "https://sample/images/products/product-1",
                             ProductCategory = ProductCategory.Bar,
-                            StoreId = 3
+                            StoreId = 1
                         },
 
                         new Product()
@@ -51,7 +51,7 @@ namespace Drippyz.Data
                             Price = 12.00,
                             ImageURL = "https://sample/images/products/product-2",
                             ProductCategory = ProductCategory.Bar,
-                            StoreId = 3
+                            StoreId = 1
 
                         },
                      });
