@@ -1,6 +1,9 @@
 using Drippyz.Data;
 using Drippyz.Data.Cart;
 using Drippyz.Data.Services;
+using Drippyz.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +26,16 @@ builder.Services.AddSession();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+});
+
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,10 +53,14 @@ app.UseRouting();
 //session
 app.UseSession();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+
 
 //Seed database
 AppDbInitializer.Seed(app);
+AppDbInitializer.SeedUserAndRolesAsync(app).Wait();
 
 app.MapControllerRoute(
     name: "default",

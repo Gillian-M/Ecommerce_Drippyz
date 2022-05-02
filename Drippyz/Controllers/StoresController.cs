@@ -1,11 +1,14 @@
 ﻿using Drippyz.Data;
 using Drippyz.Data.Services;
+using Drippyz.Data.Static;
 using Drippyz.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Drippyz.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class StoresController : Controller
     {
         // //inject IStore service 
@@ -16,8 +19,11 @@ namespace Drippyz.Controllers
             _service= service;
         }
 
+
+
         //default action result 
         //var data = return store in this controller and also  pass the data as a parameter to the view
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allStores = await _service.GetAllAsync();
@@ -36,7 +42,8 @@ namespace Drippyz.Controllers
             await _service.AddAsync(store);
             return RedirectToAction(nameof(Index));
         }
-        //Get: Stores Details 
+        //Get: Stores Details
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var storeDetails = await _service.GetByIdAsync(id);
@@ -64,9 +71,6 @@ namespace Drippyz.Controllers
             await _service.UpdateAsync(id, store);
             return RedirectToAction(nameof(Index));
         }
-
-
-
 
 
         //Store Delete

@@ -1,13 +1,16 @@
 ﻿
 using Drippyz.Data;
 using Drippyz.Data.Services;
+using Drippyz.Data.Static;
 using Drippyz.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Drippyz.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ProductsController : Controller
     {
 
@@ -23,6 +26,7 @@ namespace Drippyz.Controllers
         //default action result 
         //var data = return products in this controller and also  pass the data as a parameter to the view
         //Asynchronous method with parameters
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allProducts = await _service.GetAllAsync(n => n.Store);
@@ -31,6 +35,7 @@ namespace Drippyz.Controllers
         }
 
         //Search functionality 
+        [AllowAnonymous]
         public async Task<IActionResult> Filter(string searchString)
         {
             var allProducts = await _service.GetAllAsync(n => n.Store);
@@ -44,7 +49,8 @@ namespace Drippyz.Controllers
 
         }
 
-        //Action Get request 
+        //Action Get request
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var productDetail = await _service.GetProductByIdAsync(id);
@@ -65,6 +71,7 @@ namespace Drippyz.Controllers
 
         public async Task<IActionResult> Create(NewProductVM product)
         {
+            ModelState.Remove("ImageURL");
             if (!ModelState.IsValid)
             {
                 var productDropdownsData = await _service.GetNewProductDropdownsValues();
