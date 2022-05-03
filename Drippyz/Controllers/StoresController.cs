@@ -13,10 +13,12 @@ namespace Drippyz.Controllers
     {
         // //inject IStore service 
         private readonly IStoresService _service;
+        private IWebHostEnvironment _environment;
         //constructor
-        public StoresController(IStoresService service)
+        public StoresController(IStoresService service, IWebHostEnvironment environment)
         {
             _service= service;
+            _environment= environment;
         }
 
 
@@ -36,11 +38,29 @@ namespace Drippyz.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Glyph,Name,Description")] Store store)
+        
+        public async Task<IActionResult> Create( Store store, [FromForm] IFormFile glyph)
         {
-            if (!ModelState.IsValid) return View(store);
-            await _service.AddAsync(store);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                if (glyph != null)
+                {
+                    var name = Path.Combine(_environment.WebRootPath + "/Images", Path.GetFileName(glyph.FileName));
+                    await glyph.CopyToAsync(new FileStream(name, FileMode.Create));
+                    store.Glyph = "Images/" + glyph.FileName;
+                }
+
+                if (glyph == null)
+                {
+                    store.Glyph = "Images/noimage.PNG";
+                }
+                await _service.AddAsync(store);
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View(store);
+
+            
         }
         //Get: Stores Details
         [AllowAnonymous]
@@ -65,11 +85,26 @@ namespace Drippyz.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Glyph,Name,Description")] Store store)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Glyph,Name,Description")] Store store, IFormFile glyph)
         {
-            if (!ModelState.IsValid) return View(store);
-            await _service.UpdateAsync(id, store);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                if (glyph != null)
+                {
+                    var name = Path.Combine(_environment.WebRootPath + "/Images", Path.GetFileName(glyph.FileName));
+                    await glyph.CopyToAsync(new FileStream(name, FileMode.Create));
+                    store.Glyph = "Images/" + glyph.FileName;
+                }
+
+                if (glyph == null)
+                {
+                    store.Glyph = "Images/noimage.PNG";
+                }
+                await _service.UpdateAsync(id, store);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(store);
+
         }
 
 

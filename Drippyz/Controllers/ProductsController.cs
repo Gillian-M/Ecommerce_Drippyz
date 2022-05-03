@@ -16,11 +16,13 @@ namespace Drippyz.Controllers
 
         //declare app db context 
         private readonly IProductsService _service;
+        private IWebHostEnvironment _environment;
         //constructor
 
-        public ProductsController(IProductsService service)
+        public ProductsController(IProductsService service, IWebHostEnvironment environment)
         {
             _service = service;
+            _environment = environment;
         }
 
         //default action result 
@@ -69,18 +71,29 @@ namespace Drippyz.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Create(NewProductVM product)
+        public async Task<IActionResult> Create(NewProductVM product, [FromForm] IFormFile imageURL)
         {
+            var productDropdownsData = await _service.GetNewProductDropdownsValues();
+            ViewBag.Stores = new SelectList(productDropdownsData.Stores, "Id", "Name");
             ModelState.Remove("ImageURL");
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var productDropdownsData = await _service.GetNewProductDropdownsValues();
-                ViewBag.Stores = new SelectList(productDropdownsData.Stores, "Id", "Name");
-              
-                return View(product);
+                if (imageURL != null)
+                {
+                    var name = Path.Combine(_environment.WebRootPath + "/Images", Path.GetFileName(imageURL.FileName));
+                    await imageURL.CopyToAsync(new FileStream(name, FileMode.Create));
+                    product.ImageURL = "Images/" + imageURL.FileName;
+                }
+
+                if (imageURL == null)
+                {
+                    product.ImageURL = "Images/noimage.PNG";
+                }
+                await _service.AddNewProductAsync(product);
+                return RedirectToAction(nameof(Index));
+                
             }
-            await _service.AddNewProductAsync(product);
-            return RedirectToAction(nameof(Index));
+            return View(product);
         }
 
    
@@ -112,18 +125,33 @@ namespace Drippyz.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Edit(int id, NewProductVM product)
+        public async Task<IActionResult> Edit(int id, NewProductVM product, [FromForm] IFormFile imageURL)
         {
+            var productDropdownsData = await _service.GetNewProductDropdownsValues();
+            ViewBag.Stores = new SelectList(productDropdownsData.Stores, "Id", "Name");
+            
             if (id != product.Id) return View("NotFound");
-            if (!ModelState.IsValid)
+            
+            ModelState.Remove("ImageURL");
+            if (ModelState.IsValid)
             {
-                var productDropdownsData = await _service.GetNewProductDropdownsValues();
-                ViewBag.Stores = new SelectList(productDropdownsData.Stores, "Id", "Name");
+                if (imageURL != null)
+                {
+                    var name = Path.Combine(_environment.WebRootPath + "/Images", Path.GetFileName(imageURL.FileName));
+                    await imageURL.CopyToAsync(new FileStream(name, FileMode.Create));
+                    product.ImageURL = "Images/" + imageURL.FileName;
+                }
 
-                return View(product);
+                if (imageURL == null)
+                {
+                    product.ImageURL = "Images/noimage.PNG";
+                }
+                await _service.UpdateProductAsync(product);
+                return RedirectToAction(nameof(Index));
+
+                
             }
-            await _service.UpdateProductAsync(product);
-            return RedirectToAction(nameof(Index));
+            return View(product);
         }
 
     }

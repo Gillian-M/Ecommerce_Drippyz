@@ -22,7 +22,7 @@
                     @foreach (var item in Model)
                 {
                     <tr>
-                        <td class="align-middle"><img src="@item.Glyph" alt="@item.Name" style="max-width:150px;" /></td>
+                        @*<td class="align-middle"><img src="~/@Model.Glyph" alt="@item.Name" style="max-width:150px;" /></td>*@
                         <td class="align-middle">@Html.DisplayFor(modelItem => item.Name)</td>
                         <td class="align-middle">@Html.DisplayFor(modelItem => item.Description)</td>
                         

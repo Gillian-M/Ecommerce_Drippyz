@@ -15,7 +15,7 @@
 
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="Edit">
+                <form asp-action="Edit" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="row">
@@ -33,8 +33,8 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="ImageURL" class="control-label"></label>
-                                <input asp-for="ImageURL" class="form-control" />
-                                <span asp-validation-for="ImageURL" class="text-danger"></span>
+                                <input asp-for="ImageURL" class="form-control" type = "file" />
+                                @*<span asp-validation-for="ImageURL" class="text-danger"></span>*@
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -76,8 +76,13 @@
 
     </div>
 </div>
+<div>
+<div class= "col-1"></div>
+<div class= "col-3"></div>
+<img src="~/@Model.ImageURL" width="100%" height="250px" style="border-radius: 5px;border: 1px solid #efefef"/>
+</div>
 
-@section Scripts{ 
+@*@section Scripts{ 
     <script>
         $(document).ready(function ()){
             var output = document.getElementById("ImageUrlPreview");
@@ -88,4 +93,4 @@
             output.src = $(this).val();
         })
     </script>
-}
+}*@
