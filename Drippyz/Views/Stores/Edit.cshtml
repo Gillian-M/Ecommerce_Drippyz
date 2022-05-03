@@ -7,7 +7,7 @@
 <div class="row text">
     <div class="col-md-8 offset-2 Cover">
         <p>
-            <h1>Edit Store</h1>
+            <h4>Edit Store</h4>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
@@ -15,7 +15,9 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group text-center">
-                        <img id="StoreLogoPreview"  class="border-info rounded-circle" style="max-width: 150px" />
+                        @*<img id="StoreLogoPreview"  class="border-info rounded-circle" style="max-width: 150px" />*@
+                    <img src="~/@Model.Glyph" alt="@Model.Name"  style="max-width: 150px"/>
+
                     </div>
                     <div class="form-group">
                         <label asp-for="Glyph" class="control-label"></label>
@@ -34,7 +36,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Update" class="btn  btn-success-pink-2 float-right" />
+                        <input type="submit" value="Update" class="btn  btn-success-pink-2float-right" />
                         <a class="btn btn-outline-secondary" asp-action="Index">Back</a>
                     </div>
                 </form>
@@ -43,10 +45,9 @@
     </div>
 </div>
 <div>
-<div class= "col-1"></div>
-<div class= "col-3"></div>
-<img src="~/@Model.Glyph" runat="server" width="100%" height="250px" style="border-radius: 5px;border: 1px solid #efefef"/>
+
 </div>
+</body>
 @*@section Scripts{ 
     <script>
 
