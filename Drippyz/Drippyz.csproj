@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Images\noimage.PNG" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="wwwroot\Images\noimage.PNG" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
+    <Folder Include="Images\" />
   </ItemGroup>
 
 </Project>
