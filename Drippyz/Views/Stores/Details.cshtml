@@ -3,9 +3,10 @@
 @{
     ViewData["Title"] = "Store Details";
 }
+<body class="drip">
 
 <div class="row text">
-    <div class="col-md-8 offset-2">
+    <div class="col-md-8 offset-2 Cover">
         <p>
             <h1>Details for @Model.Name</h1>
         </p>
@@ -33,7 +34,7 @@
                     <div class="form-group">
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                            <a class="btn  btn-success-pink-2 float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                         }
                             <a class="btn btn-outline-secondary" asp-action="Index">Back</a>
                         </div>
@@ -41,6 +42,7 @@
         </div>
     </div>
 </div>
+</body>
 
 @section Scripts{
     <script>

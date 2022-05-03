@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Products";
 }
-
+<body class="drip">
 <div class="row">
 
     @foreach (var item in Model)
@@ -27,16 +27,16 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <img src="@item.ImageURL" width="100%" alt="@item.Name">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card-body">
                             <p class="card-text">@item.Description</p>
                             <p class="card-text"><b>Store: </b>@item.Store.Name</p>
                             <p class="card-text"><b>Product type: </b>@item.ProductCategory</p>
                            
-                            @*Comment*@
+                          
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -64,4 +64,4 @@
 
 
 
-
+</body>
