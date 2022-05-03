@@ -9,7 +9,7 @@ namespace Drippyz.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Company Logo")]
+        [Display(Name = "Brand Logo")]
         //[Required(ErrorMessage = "Store Logo is required")]
         public string Glyph { get; set; }
 

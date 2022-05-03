@@ -35,7 +35,7 @@
                             <p class="card-text">@item.Description</p>
                             <p class="card-text"><b>Store: </b>@item.Store.Name</p>
                             <p class="card-text"><b>Product type: </b>@item.ProductCategory</p>
-                           
+                           <p class="card-text"><b>(Price @item.Price.ToString("c"))</b></p>
                           
                         </div>
                     </div>
@@ -45,8 +45,8 @@
                                 <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id">
                                     <i class="bi bi-eye-fill"></i> Show Details
                                 </a>
-                             <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id">
-                                <i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Price.ToString("c"))</a>
+                             <a class="btn btn-success-pink-2" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id">
+                                <i class="bi bi-cart-plus"></i> Add to Cart</a>
                             </p>
                         </div>
                     </div>

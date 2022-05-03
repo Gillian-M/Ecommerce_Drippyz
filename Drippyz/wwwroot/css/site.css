@@ -59,6 +59,9 @@ h5.card-title {
     text-align: center;
 }
 
+.bg-info{
+    background-color:#fff !important;
+}
 .card-header {
     background-color: #fff;
     border-bottom: 0px;
@@ -66,7 +69,7 @@ h5.card-title {
 }
 
 
-.btn-success-pink-2 {
+.btn-success-pink-2{
     color: #fff;
     background-color: #FF3474;
     border-color: #FF3474;
@@ -145,12 +148,12 @@ media (min-width: 1200px)
     color: FF3474;
 }*/
 
-table {
+/*table {
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 15px 10px 17px -5px rgba(167, 161, 161, 0.5);
     -webkit-box-shadow: 15px 10px 17px -5px rgba(167, 161, 161, 0.5);
-}
+}*/
 
 th {
     color: #FF3474;
@@ -166,4 +169,8 @@ th {
 
 .form-control{
     margin-bottom:10px;
+}
+
+.BPink {
+    background-color: #fedce6;
 }
