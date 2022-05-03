@@ -14,12 +14,12 @@ namespace Drippyz.Models
         public string Glyph { get; set; }
 
 
-        [Display(Name = "Company Name")]
-        [Required(ErrorMessage = "Store Name is required")]
+        [Display(Name = "Brand Name")]
+        [Required(ErrorMessage = "Brand Name is required")]
         public string Name { get; set; }
 
         [Display(Name = "About")]
-        [Required(ErrorMessage = "Store Description is required")]
+        [Required(ErrorMessage = "Brand Description is required")]
         public string Description { get; set; }
 
         //Relationship (Store can have a list of products)
