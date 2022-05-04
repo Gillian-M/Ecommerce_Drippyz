@@ -80,7 +80,7 @@ namespace Drippyz.Data
 
                 // User section
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                string adminUserEmail = "admind@drippyz.com";
+                string adminUserEmail = "admin@drippyz.com";
 
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminUser == null)
