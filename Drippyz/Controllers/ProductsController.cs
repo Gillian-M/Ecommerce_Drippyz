@@ -154,5 +154,25 @@ namespace Drippyz.Controllers
             return View(product);
         }
 
+        //Product Delete
+
+        //of products exists in database call the delete confirm method
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var productDetails = await _service.GetByIdAsync(id);
+            if (productDetails == null) return View("NotFound");
+            return View(productDetails);
+        }
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirm(int id)
+        {
+
+            var productDetails = await _service.GetByIdAsync(id);
+            if (productDetails == null) return View("NotFound");
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
