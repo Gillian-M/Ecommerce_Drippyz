@@ -131,11 +131,11 @@ body.drip {
 
 /*Home page */
 
-media (min-width: 1200px)
-.h1, h1 {
-    font-size: 4.5rem;
+@media (min-width: 1200px) {
+    .h1, h1 {
+        font-size: 4.5rem;
+    }
 }
-
 
 .btn-outline-info:hover {
     color: #ffffff;
@@ -174,3 +174,21 @@ th {
 .BPink {
     background-color: #fedce6;
 }
+
+.btn-outline-index {
+    color: #fff;
+    background-color: #FFA5C4;
+    border: #FFA5C4;
+}
+
+    .btn-outline-index:hover {
+        color: #fff;
+        background-color: #ffc0cb;
+        border: #ffc0cb;
+    }
+
+    .btn-outline-index:focus {
+        color: #fff;
+        background-color: #ffc0cb;
+        border: #ffc0cb;
+    }
