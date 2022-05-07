@@ -5,6 +5,7 @@ using Drippyz.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +35,10 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 });
 
+
 builder.Services.AddControllersWithViews();
+
+
 
 var app = builder.Build();
 
