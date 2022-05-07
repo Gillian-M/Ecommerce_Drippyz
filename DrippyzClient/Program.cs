@@ -1,11 +1,5 @@
 ﻿using Drippyz.Models;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Net.Http.Formatting;
 
 namespace Drippyz.Services;
 
@@ -23,7 +17,7 @@ public class Programe
         DeleteOrder(client).Wait();
 
     }
-     // List all products from client
+    // List all products from client
     private static async Task ListAllProductEntries(HttpClient client)
     {
         try
@@ -31,9 +25,9 @@ public class Programe
             HttpResponseMessage response = await client.GetAsync("api/Products");
             if (response.IsSuccessStatusCode)
             {
-                
+
                 var product = await response.Content.ReadAsAsync<IEnumerable<Product>>();
-              
+
 
                 Console.WriteLine("List All Products");
 
@@ -90,7 +84,7 @@ public class Programe
     {
         try
         {
-            HttpResponseMessage response = await client.DeleteAsync("api/OrderItems/5");
+            HttpResponseMessage response = await client.DeleteAsync("api/OrderItems/10");
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine("");
@@ -105,7 +99,7 @@ public class Programe
         {
             Console.WriteLine(e.Message);
         }
-        
+
     }
 
 }
