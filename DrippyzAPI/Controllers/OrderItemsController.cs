@@ -20,6 +20,7 @@ namespace DrippyzAPI.Controllers
         {
             _context = context;
         }
+        
 
         // GET: api/OrderItems
         [HttpGet]
@@ -42,16 +43,25 @@ namespace DrippyzAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrderItem(int id)
         {
-            var orderItem = await _context.OrderItems.FindAsync(id);
-            if (orderItem == null)
+            try
             {
-                return NotFound();
+                var orderItem = await _context.OrderItems.FindAsync(id);
+                if (orderItem == null)
+                {
+                    Console.WriteLine("");
+                    return NotFound();
+                }
+
+                _context.OrderItems.Remove(orderItem);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
 
-            _context.OrderItems.Remove(orderItem);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool OrderItemExists(int id)

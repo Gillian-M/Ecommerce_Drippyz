@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Drippyz.Models;
 
+
 namespace DrippyzAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -16,10 +17,12 @@ namespace DrippyzAPI.Controllers
     {
         private readonly DrippyzAPIContext _context;
 
+
         public ProductsController(DrippyzAPIContext context)
         {
             _context = context;
         }
+
 
         // GET: api/Products
         [HttpGet]

@@ -84,7 +84,7 @@ public class Programe
     {
         try
         {
-            HttpResponseMessage response = await client.DeleteAsync("api/OrderItems/10");
+            HttpResponseMessage response = await client.DeleteAsync("api/OrderItems/12");
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine("");
