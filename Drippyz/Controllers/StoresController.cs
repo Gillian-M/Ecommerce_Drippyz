@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Drippyz.Controllers
 {
     [Authorize(Roles = UserRoles.Admin)]
@@ -14,14 +15,14 @@ namespace Drippyz.Controllers
         // //inject IStore service 
         private readonly IStoresService _service;
         private IWebHostEnvironment _environment;
+        
         //constructor
         public StoresController(IStoresService service, IWebHostEnvironment environment)
         {
             _service= service;
             _environment= environment;
+            
         }
-
-
 
         //default action result 
         //var data = return store in this controller and also  pass the data as a parameter to the view
@@ -41,6 +42,7 @@ namespace Drippyz.Controllers
         
         public async Task<IActionResult> Create( Store store, [FromForm] IFormFile glyph)
         {
+            ModelState.Remove("Glyph");
             if (ModelState.IsValid)
             {
                 if (glyph != null)
@@ -62,6 +64,8 @@ namespace Drippyz.Controllers
 
             
         }
+
+
         //Get: Stores Details
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
