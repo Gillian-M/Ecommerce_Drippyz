@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Web.Mvc;
 using Drippyz.Data;
 using Drippyz.Data.Services;
 using Drippyz.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
