@@ -14,18 +14,18 @@ namespace Drippyz.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _db;
 
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _context = context;
+            _db = context;
         }
 
         public async Task<IActionResult> Users()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _db.Users.ToListAsync();
             return View(users);
         }
         public IActionResult Login() => View(new LoginVM());
